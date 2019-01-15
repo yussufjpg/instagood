@@ -1,0 +1,27 @@
+{
+  "name": "instagood",
+  "version": "1.0.0",
+  "description": "A simple library with actions that instagram API don't have.",
+  "main": "./src/Instagood.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+    "type": "git",
+    "url": "https://github.com/reidark/instagood"
+  },
+  "bugs": {
+    "url": "https://github.com/reidark/instagood/issues"
+  },
+  "keywords": [
+		"instagram",
+		"instagram api",
+		"instagram follow",
+		"instagram unfollow"
+	],
+  "author": "reidark <victormatiasrei@gmail.com> (https://github.com/reidark)",
+  "license": "MIT",
+  "devDependencies": {
+    "request": "^2.88.0"
+  }
+}
