@@ -1,6 +1,8 @@
 # instagood
 A simple library with actions that instagram API don't have.
 
+[![NPM](https://nodei.co/npm/instagood.png)](https://nodei.co/npm/instagood/)
+
 ## Install via Package Managers
 ### NPM
 `npm i instagood`
