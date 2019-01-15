@@ -8,4 +8,4 @@ const
 
 // Follow
 
-user.follow('github').then((response) => console.log(response), (err) => console.log(err));
+user.do('follow', 'github').then((response) => console.log(response), (err) => console.log(err));

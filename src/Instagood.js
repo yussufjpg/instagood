@@ -139,58 +139,24 @@ class Instagood {
 	};
 
 	/**
-	 * Follow
+	 * Do
 	 *
+	 * @param {string} action 'follow', 'unfollow'.
 	 * @param {string} user User name or ID to follow.
 	 *
 	 * @returns {Promise} Returns a Promise with status 'ok' or 'fail' with respectives infos.
 	 *
 	 * @example
 	 *
-	 * foo.follow('user').then((response) => console.log(response), (err) => console.log(err));
+	 * foo.do('follow', 'user').then((response) => console.log(response), (err) => console.log(err));
 	 */
 
-	async follow(user) {
+	async do(action = 'follow', user) {
 		let id = await this.convertToId(user);
 
 		let options = {
 			method: 'POST',
-			url: `${API.routes.frienships}/${id}/follow/`,
-			json: true,
-		};
-
-		return new Promise((resolve, reject) => {
-			request(this.options(options), (err, res, body) => {
-				if (body && body.status === 'ok') {
-					resolve({
-						id,
-						...body
-					});
-				} else {
-					reject({ status: 'fail' });
-				}
-			});
-		});
-	};
-
-	/**
-	 * Unfollow
-	 *
-	 * @param {string} user User name or ID to unfollow.
-	 *
-	 * @returns {Promise} Returns a Promise with status 'ok' or 'fail' with respectives infos.
-	 *
-	 * @example
-	 *
-	 * foo.unfollow('user').then((response) => console.log(response), (err) => console.log(err));
-	 */
-
-	async unfollow(user) {
-		let id = await this.convertToId(user);
-
-		let options = {
-			method: 'POST',
-			url: `${API.routes.frienships}/${id}/unfollow/`,
+			url: `${API.routes.frienships}/${id}/${action}/`,
 			json: true,
 		};
 
