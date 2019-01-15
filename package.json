@@ -1,6 +1,6 @@
 {
   "name": "instagood",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple library with actions that instagram API don't have.",
   "main": "./src/Instagood.js",
   "scripts": {
