@@ -10,7 +10,9 @@ A simple library with actions that instagram API don't have.
 ## Install via Package Managers
 ### NPM
 
-`npm i instagood`
+```sh
+$ npm i instagood
+```
 
 ## Dependencies
 
@@ -29,25 +31,25 @@ First of all, if you want to use instagood, you need to get some infos manually 
 
 ![How to get csrf and session id](https://raw.githubusercontent.com/reidark/instagood/master/tutorial/img/getting.jpg)
 
-Save `x-xsrftoken` and `sessionid` (note that sessionid is inside a parameter string, so copy the code after `=` until `;`)
+Save `x-csrftoken` and `sessionid` (note that sessionid is inside a parameter string, so copy the code after `=` until `;`).
 
 ## Usage
 
-Import instagood
+**Import instagood**
 
 ```javascript
 const instagood = require('instagood');
 ```
 
-Instance a new user (for csrf and sessionid see Tutorial section)
+**Instance a new user (for csrf and sessionid see Tutorial section)**
 
 **Note:** user must be the logged one (the one who you got csrf and sessionid). If you logout, your csrf and sessionid will be removed from instagram auth.
 
 ```javascript
-const user = new instagood('myuser', 'csrf', 'sessionid');
+const user = new instagood('user', 'csrf', 'sessionid');
 ```
 
-Follow someone (in this case, me)
+**Follow someone (in this case, me)**
 
 ```javascript
 user.do('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
