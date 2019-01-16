@@ -1,11 +1,15 @@
-const instagood = require('./src/Instagood');
+const instagood = require('instagood');
 
 // Instance
 
 const
 
-	user = new instagood('reidarking', 'csrf', 'sessionid');
+	user = new instagood('user', 'csrf', 'sessionid');
 
 // Follow
 
-user.do('follow', 'github').then((response) => console.log(response), (err) => console.log(err));
+user.do('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
+
+// Unfollow
+
+user.do('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));

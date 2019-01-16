@@ -55,6 +55,12 @@ const user = new instagood('user', 'csrf', 'sessionid');
 user.do('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
+**Unfollow someone**
+
+```javascript
+user.do('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
+```
+
 ## Problems, bugs or questions?
 
 Open a new [issue](https://github.com/reidark/instagood/issues).
