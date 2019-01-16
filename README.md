@@ -1,4 +1,5 @@
 # instagood
+
 A simple library with actions that instagram API don't have.
 
 [![NPM](https://nodei.co/npm/instagood.png)](https://nodei.co/npm/instagood/)
@@ -8,12 +9,15 @@ A simple library with actions that instagram API don't have.
 
 ## Install via Package Managers
 ### NPM
+
 `npm i instagood`
 
 ## Dependencies
+
   - [request](https://github.com/request/request).
 
 ## Tutorial
+
 First of all, if you want to use instagood, you need to get some infos manually (at this moment):
 
 	1. Login to instagram web
@@ -25,12 +29,36 @@ First of all, if you want to use instagood, you need to get some infos manually 
 
 ![How to get csrf and session id](https://raw.githubusercontent.com/reidark/instagood/master/tutorial/img/getting.jpg)
 
-## Documentation
-*Writing...*
+Save `x-xsrftoken` and `sessionid` (note that sessionid is inside a parameter string, so copy the code after `=` until `;`)
+
+## Usage
+
+Import instagood
+
+```javascript
+const instagood = require('instagood');
+```
+
+Instance a new user (for csrf and sessionid see Tutorial section)
+
+**Note:** user must be the logged one (the one who you got csrf and sessionid). If you logout, your csrf and sessionid will be removed from instagram auth.
+
+```javascript
+const user = new instagood('myuser', 'csrf', 'sessionid');
+```
+
+Follow someone (in this case, me)
+
+```javascript
+user.do('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
+```
 
 ## Problems, bugs or questions?
+
 Open a new [issue](https://github.com/reidark/instagood/issues).
 
 ## Roadmap
-  - Implement more methods (like, comment, [sugest](https://github.com/reidark/instagood/issues))
-  - Write some tests
+
+	- Upgrade 'Usage' section
+	- Implement more methods (like, comment, [sugest](https://github.com/reidark/instagood/issues))
+	- Write some tests
