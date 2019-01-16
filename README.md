@@ -8,7 +8,6 @@ A simple library with actions that instagram API don't have.
 [![Build Status](https://travis-ci.org/reidark/instagood.png)](https://travis-ci.org/reidark/instagood)
 
 ## Install via Package Managers
-### NPM
 
 ```sh
 $ npm i instagood
@@ -16,18 +15,18 @@ $ npm i instagood
 
 ## Dependencies
 
-  - [request](https://github.com/request/request).
+  - [request](https://github.com/request/request)
 
 ## Tutorial
 
 First of all, if you want to use instagood, you need to get some infos manually (at this moment):
 
-	1. Login to instagram web
-	2. Open devtools
-	3. Enable log requests (network tab)
-	4. Follow someone
-	5. In network tab, open 'follow/' request log
-	6. Get what you need in 'Request Headers' section
+1. Login to instagram web
+2. Open devtools
+3. Enable log requests (network tab)
+4. Follow someone
+5. In network tab, open 'follow/' request log
+6. Get what you need in 'Request Headers' section
 
 ![How to get csrf and session id](https://raw.githubusercontent.com/reidark/instagood/master/tutorial/img/getting.jpg)
 
@@ -67,6 +66,6 @@ Open a new [issue](https://github.com/reidark/instagood/issues).
 
 ## Roadmap
 
-	- Upgrade 'Usage' section
-	- Implement more methods (like, comment, [sugest](https://github.com/reidark/instagood/issues))
-	- Write some tests
+- Upgrade 'Usage' section
+- Implement more methods (like, comment, [sugest](https://github.com/reidark/instagood/issues))
+- Write some tests
