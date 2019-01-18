@@ -15,7 +15,8 @@ $ npm i instagood
 
 ## Dependencies
 
-  - [request](https://github.com/request/request)
+- [request](https://github.com/request/request)
+- [jest](https://github.com/facebook/jest)
 
 ## Tutorial
 
@@ -66,6 +67,6 @@ Open a new [issue](https://github.com/reidark/instagood/issues).
 
 ## Roadmap
 
-- Upgrade 'Usage' section
+- Improve 'Usage' section
 - Implement more methods (like, comment, [sugest](https://github.com/reidark/instagood/issues))
 - Write some tests
