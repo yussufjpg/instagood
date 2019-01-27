@@ -12,7 +12,7 @@ describe('tests for instagood', () => {
 	test('instance class', () => {
 		const expected = {
 			username: 'reidarking',
-			csrf: '000000000',
+			csrftoken: '000000000',
 			sessionID: '000000000'
 		};
 
@@ -24,10 +24,10 @@ describe('tests for instagood', () => {
 	});
 
 	test('set new values', () => {
-		user.set('csrf', '999999999');
+		user.set('csrftoken', '999999999');
 		user.set('foo', 'bar');
 
-		expect(user.get('csrf')).toEqual('999999999');
+		expect(user.get('csrftoken')).toEqual('999999999');
 		expect(user.get('foo')).toEqual('bar');
 	});
 

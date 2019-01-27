@@ -25,21 +25,21 @@ class Instagood {
 	 * Constructor
 	 *
 	 * @param {string} username Instagram username.
-	 * @param {string} csrf csrftoken from instagram api requests (see tutorial).
+	 * @param {string} csrftoken csrftoken from instagram api requests (see tutorial).
 	 * @param {string} sessionID sessionID from instagram api requests (see tutorial).
 	 */
 
-	constructor(username = '', csrf = '', sessionID = '') {
+	constructor(username = '', csrftoken = '', sessionID = '') {
 		this.username = username;
-		this.csrf = csrf;
+		this.csrftoken = csrftoken;
 		this.sessionID = sessionID;
 		this.options = {
 			headers: {
 				...API.headers,
 				cookie: API.headers.cookie
-					.replace(/__CSRF__/g, this.csrf)
+					.replace(/__CSRFTOKEN__/g, this.csrftoken)
 					.replace(/__SESSIONID__/g, this.sessionID),
-				['x-csrftoken']: this.csrf,
+				['x-csrftoken']: this.csrftoken,
 			},
 		};
 	};
@@ -127,7 +127,7 @@ class Instagood {
 	 */
 
 	async do(action = 'follow', user) {
-		if (!this.csrf || !this.sessionID) {
+		if (!this.csrftoken || !this.sessionID) {
 			throw new Error('This method requires account csrftoken and sessionid.');
 		};
 

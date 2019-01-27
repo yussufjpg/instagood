@@ -30,7 +30,7 @@ First of all, if you want to use instagood, you need to get some infos manually 
 5. In network tab, open 'follow/' request log
 6. Get what you need in 'Request Headers' section
 
-![How to get csrf and session id](https://raw.githubusercontent.com/reidark/instagood/master/tutorial/img/getting.jpg)
+![How to get csrftoken and session id](https://raw.githubusercontent.com/reidark/instagood/master/tutorial/img/getting.jpg)
 
 Save `x-csrftoken` and `sessionid` (note that sessionid is inside a parameter string, so copy the code after `=` until `;`).
 
@@ -42,12 +42,17 @@ Save `x-csrftoken` and `sessionid` (note that sessionid is inside a parameter st
 const instagood = require('instagood');
 ```
 
-**Instance a new user (for csrf and sessionid see Tutorial section)**
+**Instance a new user (for csrftoken and sessionid see Tutorial section)**
 
-**Note:** user must be the logged one (the one who you got csrf and sessionid). If you logout, your csrf and sessionid will be removed from instagram auth.
+**Note:** user must be the logged one (the one who you got csrftoken and sessionid). If you logout, your csrftoken and sessionid will be removed from instagram auth.
 
 ```javascript
-const user = new instagood('user', 'csrf', 'sessionid');
+const user = new instagood('user', 'csrftoken', 'sessionid');
+```
+**Get user information**
+
+```javascript
+user.getUserInfo('reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
 **Follow someone (in this case, me)**
