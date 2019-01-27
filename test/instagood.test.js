@@ -1,6 +1,6 @@
 // Module
 
-const instagood = require('../src/Instagood');
+const instagood = require('../src/instagood');
 
 // Instance
 
@@ -16,7 +16,7 @@ describe('tests for instagood', () => {
 			sessionID: '000000000'
 		};
 
-		expect(user).toEqual(expected);
+		expect(user).toMatchObject(expected);
 	});
 
 	test('get something', () => {

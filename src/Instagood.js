@@ -8,17 +8,15 @@
  * Module dependencies.
  */
 
-const
-
-	API = require('./api'),
-	request = require('request');
+const API = require('./api.json');
+const request = require('request');
 
 /**
  * Instagood
  *
  * @example
  *
- * let instance = new instagood('user');
+ * let instance = new instagood('user', 'csrftoken', 'sessionid');
  */
 
 class Instagood {
@@ -27,14 +25,23 @@ class Instagood {
 	 * Constructor
 	 *
 	 * @param {string} username Instagram username.
-	 * @param {string} csrf csrftoken from instagram api requests ().
-	 * @param {string} sessionID sessionID from instagram api requests ().
+	 * @param {string} csrf csrftoken from instagram api requests (see tutorial).
+	 * @param {string} sessionID sessionID from instagram api requests (see tutorial).
 	 */
 
 	constructor(username = '', csrf = '', sessionID = '') {
 		this.username = username;
 		this.csrf = csrf;
 		this.sessionID = sessionID;
+		this.options = {
+			headers: {
+				...API.headers,
+				cookie: API.headers.cookie
+					.replace(/__CSRF__/g, this.csrf)
+					.replace(/__SESSIONID__/g, this.sessionID),
+				['x-csrftoken']: this.csrf,
+			},
+		};
 	};
 
 	/**
@@ -65,56 +72,9 @@ class Instagood {
 	};
 
 	/**
-	 * Get User ID
-	 *
-	 * @param {string} username Username.
-	 *
-	 * @returns {object} Object with user infos.
-	 */
-
-	getUserInfo(username) {
-		let options = {
-			method: 'GET',
-			url: `${API.routes.user.info}${username}`,
-		};
-
-		return new Promise((resolve, reject) => {
-			request(options, (err, res, body) => {
-				body = JSON.parse(body);
-
-				if (body && body.status === 'ok' && body.users.length) {
-					resolve({
-						status: 'ok',
-						...body.users[0].user,
-					});
-				} else {
-					reject({ status: 'fail' });
-				}
-			});
-		});
-	};
-
-	/**
-	 * Format headers
-	 *
-	 * @param {object} headers Custom headers.
-	 *
-	 * @returns {object} Object with headers formatted values.
-	 */
-
-	formatHeaders(headers = API.headers) {
-		headers['x-csrftoken'] = this.csrf;
-		headers.cookie = headers.cookie
-				.replace(/__CSRF__/g, this.csrf)
-				.replace(/__SESSIONID__/g, this.sessionID);
-
-		return headers;
-	};
-
-	/**
 	 * Convert to ID
 	 *
-	 * @param {string} user User.
+	 * @param {string} user Username to convert.
 	 *
 	 * @returns {Promise} Promise containing the user id.
 	 */
@@ -124,18 +84,33 @@ class Instagood {
 	};
 
 	/**
-	 * Options
+	 * Get User
 	 *
-	 * @param {object} options Custom options.
+	 * @param {string} username Username.
 	 *
-	 * @returns {object} Object with request options values.
+	 * @returns {object} Object with user infos.
 	 */
 
-	options(options) {
-		return {
-			headers: this.formatHeaders(),
-			...options,
+	getUserInfo(username = this.username) {
+		let options = {
+			method: 'GET',
+			url: `${API.routes.user.info}${username}`,
 		};
+
+		return new Promise((resolve, reject) => {
+			request(options, (err, res, body) => {
+				let response = JSON.parse(body);
+
+				if (response && response.status === 'ok' && response.users.length) {
+					resolve({
+						status: 'ok',
+						...response.users[0].user,
+					});
+				} else {
+					reject({ status: 'fail' });
+				}
+			});
+		});
 	};
 
 	/**
@@ -152,16 +127,20 @@ class Instagood {
 	 */
 
 	async do(action = 'follow', user) {
-		let id = await this.convertToId(user);
+		if (!this.csrf || !this.sessionID) {
+			throw new Error('This method requires account csrftoken and sessionid.');
+		};
 
+		let id = await this.convertToId(user);
 		let options = {
+			...this.options,
 			method: 'POST',
 			url: `${API.routes.frienships}/${id}/${action}/`,
 			json: true,
 		};
 
 		return new Promise((resolve, reject) => {
-			request(this.options(options), (err, res, body) => {
+			request(options, (err, res, body) => {
 				if (body && body.status === 'ok') {
 					resolve({
 						id,

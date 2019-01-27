@@ -6,6 +6,7 @@ A simple library with actions that instagram API don't have.
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/8800bfa9d98622e8d86e/maintainability)](https://codeclimate.com/github/reidark/instagood/maintainability)
 [![Build Status](https://travis-ci.org/reidark/instagood.png)](https://travis-ci.org/reidark/instagood)
+[![Dependencies Status](https://david-dm.org/reidark/instagood.svg)](https://david-dm.org/reidark/instagood)
 
 ## Install via Package Managers
 
