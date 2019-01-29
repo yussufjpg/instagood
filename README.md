@@ -49,10 +49,17 @@ const instagood = require('instagood');
 ```javascript
 const user = new instagood('user', 'csrftoken', 'sessionid');
 ```
+
 **Get user information**
 
 ```javascript
 user.getUserInfo('reidarking').then((response) => console.log(response), (err) => console.log(err));
+```
+
+**Get user followers**
+
+```javascript
+user.getUserFollowers('reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
 ```
 
 **Follow someone (in this case, me)**

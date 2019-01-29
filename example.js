@@ -2,11 +2,15 @@ const instagood = require('./src/instagood');
 
 // Instance
 
-const user = new instagood('user', 'csrftoken', 'sessionid');
+const user = new instagood('reidarking', 'csrftoken', 'sessionid');
 
 // Get user information
 
 user.getUserInfo('reidarking').then((response) => console.log(response), (err) => console.log(err));
+
+// Get user followers
+
+user.getUserFollowers('reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
 
 // Follow
 

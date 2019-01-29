@@ -84,11 +84,11 @@ class Instagood {
 	};
 
 	/**
-	 * Get User
+	 * Get User Information
 	 *
 	 * @param {string} username Username.
 	 *
-	 * @returns {object} Object with user infos.
+	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos.
 	 */
 
 	getUserInfo(username = this.username) {
@@ -114,12 +114,46 @@ class Instagood {
 	};
 
 	/**
+	 * Get User Followers
+	 *
+	 * @param {string} user User name or id to retrieve followers.
+	 * @param {number} paginate The number of followers per request.
+	 *
+	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos. If 'ok', the object will contain the followers from the specified user.
+	 */
+
+	async getUserFollowers(user = this.username, paginate = 25) {
+		let id = await this.convertToId(user);
+		let options = {
+			...this.options,
+			method: 'GET',
+			url: `${API.routes.followers}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate}}`,
+		};
+
+		return new Promise((resolve, reject) => {
+			request(options, (err, res, body) => {
+				let response = JSON.parse(body);
+
+				if (response && response.status === 'ok') {
+					resolve({
+						followers: response.data.user.edge_followed_by.edges,
+						paginate,
+						status: 'ok',
+					});
+				} else {
+					reject({ status: 'fail' });
+				}
+			});
+		});
+	};
+
+	/**
 	 * Do
 	 *
 	 * @param {string} action 'follow', 'unfollow'.
 	 * @param {string} user User name or ID to follow.
 	 *
-	 * @returns {Promise} Returns a Promise with status 'ok' or 'fail' with respectives infos.
+	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos.
 	 *
 	 * @example
 	 *
