@@ -17,6 +17,9 @@ $ npm i instagood
 ## Dependencies
 
 - [request](https://github.com/request/request)
+
+## Tests
+
 - [jest](https://github.com/facebook/jest)
 
 ## Tutorial
