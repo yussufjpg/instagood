@@ -12,7 +12,6 @@ const API = require('./api.json');
 const request = require('request');
 const querystring = require('querystring');
 
-
 /**
  * Instagood
  *
@@ -217,16 +216,13 @@ class Instagood {
 		return new Promise((resolve, reject) => {
 			request(options, (err, res, body) => {
 				if (body && body.status === 'ok') {
-					resolve({						
-						...body
-					});
+					resolve({	...body });
 				} else {
 					reject({ status: 'fail' });
 				}
 			});
 		});
 	};
-
 
 	/**
 	 * Say
@@ -250,24 +246,22 @@ class Instagood {
 		    comment_text: message,
 		    replied_to_comment_id: '',		    
 		};
-
 		let options = {
-			...this.options,
+			headers: {
+				...this.options.headers,
+				['Content-Length']: body.length,
+				['Content-Type']: 'application/x-www-form-urlencoded',
+			},
 			method: 'POST',
 			url: `${API.routes.comments}/${media}/add/?hl=pt-br`,
 			json: true,
-			body: querystring.stringify(body)
-		};
-
-		options.headers['Content-Length'] = body.length;
-		options.headers['Content-Type'] = "application/x-www-form-urlencoded";		
+			body: querystring.stringify(body),
+		};		
 
 		return new Promise((resolve, reject) => {
 			request(options, (err, res, body) => {
 				if (body && body.status === 'ok') {
-					resolve({						
-						...body
-					});
+					resolve({ ...body });
 				} else {					
 					reject({ status: 'fail' });
 				}
