@@ -77,19 +77,19 @@ user.do('follow', 'reidarking').then((response) => console.log(response), (err) 
 user.do('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
-**Like someone media**
+**Like any media**
 
 ```javascript
 user.likes('like', '1973268968068413381').then((response) => console.log(response), (err) => console.log(err));
 ```
 
-**Unlike someone media**
+**Unlike any media**
 
 ```javascript
 user.likes('unlike', '1973268968068413381').then((response) => console.log(response), (err) => console.log(err));
 ```
 
-**Comment someone media**
+**Comment any media**
 
 ```javascript
 user.say('1973450160415933226', 'I liked!').then((response) => console.log(response), (err) => console.log(err));
