@@ -1,7 +1,7 @@
 {
   "name": "instagood",
   "private": false,
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "A simple library with actions that instagram API don't have.",
   "main": "./src/instagood.js",
   "scripts": {
@@ -19,6 +19,9 @@
     "instagram api",
     "instagram follow",
     "instagram unfollow"
+    "instagram like"
+    "instagram unlike"
+    "instagram comment"
   ],
   "author": "reidark <victormatiasrei@gmail.com> (https://github.com/reidark)",
   "license": "MIT",
