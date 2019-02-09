@@ -10,6 +10,7 @@
 
 const API = require('./api.json');
 const request = require('request');
+const querystring = require('querystring');
 
 /**
  * Instagood
@@ -187,6 +188,86 @@ class Instagood {
 		});
 	};
 
+	/**
+	 * Likes
+	 *
+	 * @param {string} action 'like', 'unlike'.
+	 * @param {string} media Media ID to like/unlike
+	 *
+	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos.
+	 *
+	 * @example
+	 *
+	 * foo.likes('unlike', '1973268968068413381').then((response) => console.log(response), (err) => console.log(err));
+	 */
+
+	likes(action = 'unlike', media) {		
+		if (!this.csrftoken || !this.sessionID) {
+			throw new Error('This method requires account csrftoken and sessionid.');
+		};
+
+		let options = {
+			...this.options,
+			method: 'POST',
+			url: `${API.routes.likes}/${media}/${action}/?hl=pt-br`,
+			json: true,
+		};
+
+		return new Promise((resolve, reject) => {
+			request(options, (err, res, body) => {
+				if (body && body.status === 'ok') {
+					resolve({	...body });
+				} else {
+					reject({ status: 'fail' });
+				}
+			});
+		});
+	};
+
+	/**
+	 * Say
+	 *
+	 * @param {string} media Media ID to comment
+	 * @param {string} message Message to say
+	 *
+	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos.
+	 *
+	 * @example
+	 *
+	 * foo.say('1973450160415933226', 'Hi there').then((response) => console.log(response), (err) => console.log(err));
+	 */
+
+	say(media, message) {		
+		if (!this.csrftoken || !this.sessionID) {
+			throw new Error('This method requires account csrftoken and sessionid.');
+		};
+
+		let body = {
+		    comment_text: message,
+		    replied_to_comment_id: '',		    
+		};
+		let options = {
+			headers: {
+				...this.options.headers,
+				['Content-Length']: body.length,
+				['Content-Type']: 'application/x-www-form-urlencoded',
+			},
+			method: 'POST',
+			url: `${API.routes.comments}/${media}/add/?hl=pt-br`,
+			json: true,
+			body: querystring.stringify(body),
+		};		
+
+		return new Promise((resolve, reject) => {
+			request(options, (err, res, body) => {
+				if (body && body.status === 'ok') {
+					resolve({ ...body });
+				} else {					
+					reject({ status: 'fail' });
+				}
+			});
+		});
+	};	
 };
 
 module.exports = Instagood;

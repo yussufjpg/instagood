@@ -77,6 +77,24 @@ user.do('follow', 'reidarking').then((response) => console.log(response), (err) 
 user.do('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
+**Like any media**
+
+```javascript
+user.likes('like', '1973268968068413381').then((response) => console.log(response), (err) => console.log(err));
+```
+
+**Unlike any media**
+
+```javascript
+user.likes('unlike', '1973268968068413381').then((response) => console.log(response), (err) => console.log(err));
+```
+
+**Comment any media**
+
+```javascript
+user.say('1973450160415933226', 'I liked!').then((response) => console.log(response), (err) => console.log(err));
+```
+
 ## Problems, bugs or questions?
 
 Open a new [issue](https://github.com/reidark/instagood/issues).
@@ -84,5 +102,5 @@ Open a new [issue](https://github.com/reidark/instagood/issues).
 ## Roadmap
 
 - Improve 'Usage' section
-- Implement more methods (like, comment, [sugest](https://github.com/reidark/instagood/issues))
+- Implement more methods (list all medias from the user, [sugest](https://github.com/reidark/instagood/issues))
 - Write some tests
