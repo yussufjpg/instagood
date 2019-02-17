@@ -24,14 +24,14 @@ const patterns = {
 };
 
 /**
- * Instagood
+ * instagood
  *
  * @example
  *
  * let instance = new instagood('user', 'password');
  */
 
-class Instagood {
+class instagood {
 
 	/**
 	 * Constructor
@@ -43,7 +43,7 @@ class Instagood {
 	constructor(username = '', password = '') {
 		this.auth = {
 			username,
-			password
+			password,
 		};
 		this.options = {
 			headers: {
@@ -53,8 +53,8 @@ class Instagood {
 				'X-Instagram-AJAX': 1,
 				'X-Requested-With': 'XMLHttpRequest',
 				'Referer': base,
-			}
-		}
+			},
+		};
 	};
 
 	/**
@@ -97,6 +97,7 @@ class Instagood {
 
 	cookienary(item, type) {
 		let match = item.join('').match(patterns[type]);
+
 		return match ? match[2] : '';
 	};
 
@@ -200,7 +201,7 @@ class Instagood {
 	};
 
 	/**
-	 * Do
+	 * Friendships
 	 *
 	 * @param {string} action 'follow', 'unfollow'.
 	 * @param {string} user User name or ID to follow.
@@ -209,10 +210,10 @@ class Instagood {
 	 *
 	 * @example
 	 *
-	 * foo.do('follow', 'user').then((response) => console.log(response), (err) => console.log(err));
+	 * foo.friendships('follow', 'user').then((response) => console.log(response), (err) => console.log(err));
 	 */
 
-	async do(action = 'follow', user) {
+	async friendships(action = 'follow', user) {
 		let id = await this.convertToId(user);
 		let options = {
 			...this.options,
@@ -224,7 +225,7 @@ class Instagood {
 				if (body && body.status === 'ok') {
 					resolve({
 						id,
-						...body
+						...body,
 					});
 				} else {
 					reject({ status: 'fail' });
@@ -247,8 +248,8 @@ class Instagood {
 				}
 			});
 		});
-  }
+	}
 
 };
 
-module.exports = Instagood;
+module.exports = instagood;

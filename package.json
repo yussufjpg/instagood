@@ -1,7 +1,7 @@
 {
   "name": "instagood",
   "version": "2.0.0",
-  "description": "A simple library with actions that instagram API don't have.",
+  "description": "A simple library with actions that instagram API don't have. Now, with login.",
   "main": "./src/instagood.js",
   "scripts": {
     "test": "jest"
@@ -17,12 +17,15 @@
     "instagram",
     "instagram api",
     "instagram follow",
-    "instagram unfollow"
+		"instagram unfollow",
+		"instagram login"
   ],
   "author": "reidark <victormatiasrei@gmail.com> (https://github.com/reidark)",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^23.6.0",
-    "request": "^2.88.0"
-  }
+    "jest": "^23.6.0"
+	},
+	"dependencies": {
+		"request": "^2.88.0"
+	}
 }
