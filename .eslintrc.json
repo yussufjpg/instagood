@@ -10,6 +10,11 @@
 			"experimentalObjectRestSpread": true
 		}
 	},
+	"globals": {
+		"describe": true,
+		"test": true,
+		"expect": true
+	},
 	"rules": {
 		"semi": [
 			"error",

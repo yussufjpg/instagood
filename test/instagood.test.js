@@ -13,7 +13,7 @@ describe('tests for instagood', () => {
 		const expected = {
 			username: 'reidarking',
 			csrftoken: '000000000',
-			sessionID: '000000000'
+			sessionID: '000000000',
 		};
 
 		expect(user).toMatchObject(expected);

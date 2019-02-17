@@ -68,13 +68,13 @@ user.getUserFollowers('reidarking', 20).then((response) => console.log(response.
 **Follow someone (in this case, me)**
 
 ```javascript
-user.do('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
+user.frienships('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
 **Unfollow someone**
 
 ```javascript
-user.do('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
+user.frienships('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
 **Like any media**
@@ -92,7 +92,7 @@ user.likes('unlike', '1973268968068413381').then((response) => console.log(respo
 **Comment any media**
 
 ```javascript
-user.say('1973450160415933226', 'I liked!').then((response) => console.log(response), (err) => console.log(err));
+user.comments('1973450160415933226', 'I liked!').then((response) => console.log(response), (err) => console.log(err));
 ```
 
 ## Problems, bugs or questions?

@@ -149,7 +149,7 @@ class Instagood {
 	};
 
 	/**
-	 * Do
+	 * Frienships
 	 *
 	 * @param {string} action 'follow', 'unfollow'.
 	 * @param {string} user User name or ID to follow.
@@ -158,10 +158,10 @@ class Instagood {
 	 *
 	 * @example
 	 *
-	 * foo.do('follow', 'user').then((response) => console.log(response), (err) => console.log(err));
+	 * foo.frienships('follow', 'user').then((response) => console.log(response), (err) => console.log(err));
 	 */
 
-	async do(action = 'follow', user) {
+	async frienships(action = 'follow', user) {
 		if (!this.csrftoken || !this.sessionID) {
 			throw new Error('This method requires account csrftoken and sessionid.');
 		};
@@ -179,7 +179,7 @@ class Instagood {
 				if (body && body.status === 'ok') {
 					resolve({
 						id,
-						...body
+						...body,
 					});
 				} else {
 					reject({ status: 'fail' });
@@ -201,7 +201,7 @@ class Instagood {
 	 * foo.likes('unlike', '1973268968068413381').then((response) => console.log(response), (err) => console.log(err));
 	 */
 
-	likes(action = 'unlike', media) {		
+	likes(action = 'unlike', media) {
 		if (!this.csrftoken || !this.sessionID) {
 			throw new Error('This method requires account csrftoken and sessionid.');
 		};
@@ -225,7 +225,7 @@ class Instagood {
 	};
 
 	/**
-	 * Say
+	 * Comments
 	 *
 	 * @param {string} media Media ID to comment
 	 * @param {string} message Message to say
@@ -234,17 +234,17 @@ class Instagood {
 	 *
 	 * @example
 	 *
-	 * foo.say('1973450160415933226', 'Hi there').then((response) => console.log(response), (err) => console.log(err));
+	 * foo.comments('1973450160415933226', 'I liked!').then((response) => console.log(response), (err) => console.log(err));
 	 */
 
-	say(media, message) {		
+	comments(media, message) {
 		if (!this.csrftoken || !this.sessionID) {
 			throw new Error('This method requires account csrftoken and sessionid.');
 		};
 
 		let body = {
-		    comment_text: message,
-		    replied_to_comment_id: '',		    
+			'comment_text': message,
+			'replied_to_comment_id': '',
 		};
 		let options = {
 			headers: {
@@ -256,18 +256,18 @@ class Instagood {
 			url: `${API.routes.comments}/${media}/add/?hl=pt-br`,
 			json: true,
 			body: querystring.stringify(body),
-		};		
+		};
 
 		return new Promise((resolve, reject) => {
 			request(options, (err, res, body) => {
 				if (body && body.status === 'ok') {
 					resolve({ ...body });
-				} else {					
+				} else {
 					reject({ status: 'fail' });
 				}
 			});
 		});
-	};	
+	};
 };
 
 module.exports = Instagood;
