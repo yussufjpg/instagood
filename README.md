@@ -68,13 +68,13 @@ user.getUserFollowers('reidarking', 20).then((response) => console.log(response.
 **Follow someone (in this case, me)**
 
 ```javascript
-user.frienships('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
+user.friendships('follow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
 **Unfollow someone**
 
 ```javascript
-user.frienships('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
+user.friendships('unfollow', 'reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
 **Like any media**

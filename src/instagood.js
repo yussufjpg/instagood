@@ -149,7 +149,7 @@ class Instagood {
 	};
 
 	/**
-	 * Frienships
+	 * Friendships
 	 *
 	 * @param {string} action 'follow', 'unfollow'.
 	 * @param {string} user User name or ID to follow.
@@ -158,10 +158,10 @@ class Instagood {
 	 *
 	 * @example
 	 *
-	 * foo.frienships('follow', 'user').then((response) => console.log(response), (err) => console.log(err));
+	 * foo.friendships('follow', 'user').then((response) => console.log(response), (err) => console.log(err));
 	 */
 
-	async frienships(action = 'follow', user) {
+	async friendships(action = 'follow', user) {
 		if (!this.csrftoken || !this.sessionID) {
 			throw new Error('This method requires account csrftoken and sessionid.');
 		};
@@ -170,7 +170,7 @@ class Instagood {
 		let options = {
 			...this.options,
 			method: 'POST',
-			url: `${API.routes.frienships}/${id}/${action}/`,
+			url: `${API.routes.friendships}/${id}/${action}/`,
 			json: true,
 		};
 

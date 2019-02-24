@@ -3,7 +3,7 @@
 		"user": {
 			"info": "https://www.instagram.com/web/search/topsearch/?context=user&count=0&query="
 		},
-		"frienships": "https://www.instagram.com/web/friendships",
+		"friendships": "https://www.instagram.com/web/friendships",
 		"followers": "https://www.instagram.com/graphql/query/?query_hash=56066f031e6239f35a904ac20c9f37d9&variables=",
 		"likes": "https://www.instagram.com/web/likes",
 		"comments": "https://www.instagram.com/web/comments"
