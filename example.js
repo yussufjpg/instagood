@@ -10,7 +10,11 @@ user.getUserInfo('reidarking').then((response) => console.log(response), (err) =
 
 // Get user followers
 
-user.getUserFollowers('reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
+user.getFriendships('followers', 'reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
+
+// Get user following
+
+user.getFriendships('following', 'reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
 
 // Follow
 

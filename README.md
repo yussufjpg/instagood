@@ -62,7 +62,13 @@ user.getUserInfo('reidarking').then((response) => console.log(response), (err) =
 **Get user followers**
 
 ```javascript
-user.getUserFollowers('reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
+user.getFriendships('followers', 'reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
+```
+
+**Get user following**
+
+```javascript
+user.getFriendships('following', 'reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));
 ```
 
 **Follow someone (in this case, me)**

@@ -115,20 +115,21 @@ class Instagood {
 	};
 
 	/**
-	 * Get User Followers
+	 * Get User Friendships
 	 *
-	 * @param {string} user User name or id to retrieve followers.
-	 * @param {number} paginate The number of followers per request.
+	 * @param {string} method Methods "followers" or "following".
+	 * @param {string} user User name or id to retrieve.
+	 * @param {number} paginate The number to paginate per request.
 	 *
-	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos. If 'ok', the object will contain the followers from the specified user.
+	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos. If 'ok', the object will contain the information from the specified user.
 	 */
 
-	async getUserFollowers(user = this.username, paginate = 25) {
+	async getFriendships(method = 'followers', user = this.username, paginate = 25) {
 		let id = await this.convertToId(user);
 		let options = {
 			...this.options,
 			method: 'GET',
-			url: `${API.routes.followers}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate}}`,
+			url: `${API.routes[method]}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate}}`,
 		};
 
 		return new Promise((resolve, reject) => {
@@ -137,7 +138,7 @@ class Instagood {
 
 				if (response && response.status === 'ok') {
 					resolve({
-						followers: response.data.user.edge_followed_by.edges,
+						followers: response.data.user[method === 'followers' ? 'edge_followed_by' : 'edge_follow'].edges,
 						paginate,
 						status: 'ok',
 					});
