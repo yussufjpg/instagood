@@ -138,7 +138,7 @@ class Instagood {
 
 				if (response && response.status === 'ok') {
 					resolve({
-						followers: response.data.user[method === 'followers' ? 'edge_followed_by' : 'edge_follow'].edges,
+						friendships: response.data.user[method === 'followers' ? 'edge_followed_by' : 'edge_follow'].edges,
 						paginate,
 						status: 'ok',
 					});
