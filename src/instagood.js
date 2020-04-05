@@ -124,23 +124,27 @@ class Instagood {
 	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos. If 'ok', the object will contain the information from the specified user.
 	 */
 
-	async getFriendships(method = 'followers', user = this.username, paginate = 25, offset = 0) {
+	async getFriendships(method = 'followers', user = this.username, paginate = 25, after = null) {
 		let id = await this.convertToId(user);
+
 		let options = {
 			...this.options,
 			method: 'GET',
-			url: `${API.routes[method]}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate},"after":${offset}}`,
+			url: `${API.routes[method]}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate}}`,
 		};
+		if (after) {
+			options.url = `${API.routes[method]}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate},"after":"${after}"}`;
+		}
 
 		return new Promise((resolve, reject) => {
 			request(options, (err, res, body) => {
 				let response = JSON.parse(body);
-
 				if (response && response.status === 'ok') {
 					resolve({
 						friendships: response.data.user[method === 'followers' ? 'edge_followed_by' : 'edge_follow'].edges,
 						paginate,
 						status: 'ok',
+						page_info: response.data.user[method === 'followers' ? 'edge_followed_by' : 'edge_follow'].page_info
 					});
 				} else {
 					reject({ status: 'fail' });
