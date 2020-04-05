@@ -124,12 +124,12 @@ class Instagood {
 	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos. If 'ok', the object will contain the information from the specified user.
 	 */
 
-	async getFriendships(method = 'followers', user = this.username, paginate = 25) {
+	async getFriendships(method = 'followers', user = this.username, paginate = 25, offset = 0) {
 		let id = await this.convertToId(user);
 		let options = {
 			...this.options,
 			method: 'GET',
-			url: `${API.routes[method]}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate}}`,
+			url: `${API.routes[method]}{"id":"${id}","include_reel":true,"fetch_mutual":true,"first":${paginate},"after":${offset}}`,
 		};
 
 		return new Promise((resolve, reject) => {
