@@ -114,6 +114,29 @@ class Instagood {
 		});
 	};
 
+	async getUserPosts(username = this.username) {
+		let userId = await this.convertToId(username);
+		let options = {
+			method: 'GET',
+			url: `${API.routes.posts}{"id":"${userId}","first":12,"before":"QVFEbWFRbFQ3ZVNfY3lPand4Um9NUXAzV1JvbDB2VFpGRjBQM05YOUtvdi1OMEliTTlDZVlDdE0zTjlqamlQWlYwY0xWeTN3TmRvSUlfeWNPcDZEdGZEMw=="}`,
+		};
+
+		return new Promise((resolve, reject) =>  {
+			request(options, (err, res, body) => {
+				let response = JSON.parse(body);
+				
+				if (response && response.status === 'ok' && response.data) {
+					resolve({
+						status: 'ok',
+						...response.data.user.edge_owner_to_timeline_media.edges,
+					});
+				} else {
+					reject({ status: 'fail' });
+				}
+			});
+		});
+	};
+
 	/**
 	 * Get User Friendships
 	 *

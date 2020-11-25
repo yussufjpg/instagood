@@ -8,6 +8,10 @@ const user = new instagood('reidarking', 'csrftoken', 'sessionid');
 
 user.getUserInfo('reidarking').then((response) => console.log(response), (err) => console.log(err));
 
+// Get user posts
+
+user.getUserPosts('reidarking').then((response) => console.log(response), (err) => console.log(err));
+
 // Get user followers
 
 user.getFriendships('followers', 'reidarking', 20).then((response) => console.log(response.followers), (err) => console.log(err));

@@ -6,6 +6,7 @@
 		"friendships": "https://www.instagram.com/web/friendships",
 		"followers": "https://www.instagram.com/graphql/query/?query_hash=56066f031e6239f35a904ac20c9f37d9&variables=",
 		"following": "https://www.instagram.com/graphql/query/?query_hash=d04b0a864b4b54837c0d870b0e77e076&variables=",
+		"posts":"https://www.instagram.com/graphql/query/?query_hash=003056d32c2554def87228bc3fd9668a&variables=",
 		"likes": "https://www.instagram.com/web/likes",
 		"comments": "https://www.instagram.com/web/comments"
 	},
