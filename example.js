@@ -10,7 +10,7 @@ user.getUserInfo('reidarking').then((response) => console.log(response), (err) =
 
 // Get user posts
 
-user.getUserPosts('reidarking').then((response) => console.log(response), (err) => console.log(err));
+user.getUserPosts('reidarking', 12).then((response) => console.log(response), (err) => console.log(err));
 
 // Get user followers
 

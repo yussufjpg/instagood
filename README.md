@@ -59,6 +59,14 @@ const user = new instagood('user', 'csrftoken', 'sessionid');
 user.getUserInfo('reidarking').then((response) => console.log(response), (err) => console.log(err));
 ```
 
+**Get user posts**
+
+**Note:** 12 is the limit of the posts the code will return, Instagram normally takes 12 posts
+
+```javascript
+user.getUserPosts('reidarking', 12).then((response) => console.log(response), (err) => console.log(err));
+```
+
 **Get user followers**
 
 ```javascript

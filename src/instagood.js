@@ -114,17 +114,27 @@ class Instagood {
 		});
 	};
 
-	async getUserPosts(username = this.username) {
+	/**
+	 * Get User Information
+	 *
+	 * @param {string} username Username.
+	 *
+	 *  @param {integer} postCount limit of the posts to scrape
+	 * 
+	 * @returns {object} Returns a Promise with status 'ok' or 'fail' with respective infos.
+	 */
+
+	async getUserPosts(username = this.username, postCount) {
 		let userId = await this.convertToId(username);
 		let options = {
 			method: 'GET',
-			url: `${API.routes.posts}{"id":"${userId}","first":12,"before":"QVFEbWFRbFQ3ZVNfY3lPand4Um9NUXAzV1JvbDB2VFpGRjBQM05YOUtvdi1OMEliTTlDZVlDdE0zTjlqamlQWlYwY0xWeTN3TmRvSUlfeWNPcDZEdGZEMw=="}`,
+			url: `${API.routes.posts}{"id":"${userId}","first":${postCount},"before":"QVFEbWFRbFQ3ZVNfY3lPand4Um9NUXAzV1JvbDB2VFpGRjBQM05YOUtvdi1OMEliTTlDZVlDdE0zTjlqamlQWlYwY0xWeTN3TmRvSUlfeWNPcDZEdGZEMw=="}`,
 		};
 
 		return new Promise((resolve, reject) =>  {
 			request(options, (err, res, body) => {
 				let response = JSON.parse(body);
-				
+
 				if (response && response.status === 'ok' && response.data) {
 					resolve({
 						status: 'ok',
